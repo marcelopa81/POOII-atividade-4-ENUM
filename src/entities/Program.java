@@ -23,6 +23,12 @@ public class Program {
 		
 		p1.listarContratacao();
 		
+		c1.contratar();
+		
+		p1.adicionarContratacao(c1);
+		
+		p1.listarContratacao();
+		
 	}
 	
 
