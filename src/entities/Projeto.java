@@ -91,10 +91,10 @@ public class Projeto {
 		}
 		
 		if (!this.listaContratacao.isEmpty()) {
-			System.out.println("**Contratações**\n" + "\t Projeto: " + this.nome);
+			System.out.println("**Contratações**\n" + "Projeto: \n\t" + this.nome +
+						"\nFuncionário(s): ");
 			for (Contratacao c : listaContratacao) {
-				System.out.println("\t Funcionário(s): " + 
-						c.getFuncionario().getNome() +
+				System.out.println("\t" + c.getFuncionario().getNome() +
 						" [Status: " + c.getStatus() + "]");
 			}
 		}
