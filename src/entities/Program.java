@@ -17,16 +17,14 @@ public class Program {
 		Contratacao c1 = new Contratacao(p1, f1, Cargo.DIRETOR, df.parse("01/01/2020"));
 		Contratacao c2 = new Contratacao(p1, f2, Cargo.ADMINISTRATIVO, df.parse("11/10/2020"));
 		
-				
-		p1.adicionarContratacao(c1);
-		p1.adicionarContratacao(c2);
-		
 		p1.listarContratacao();
-		
+			
 		c1.contratar();
 		
-		p1.adicionarContratacao(c1);
+		p1.listarContratacao();
+		c1.demitir();
 		
+		c2.contratar();
 		p1.listarContratacao();
 		
 	}

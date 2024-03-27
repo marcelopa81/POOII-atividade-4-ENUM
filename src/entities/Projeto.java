@@ -11,7 +11,7 @@ public class Projeto {
 	private Date dataInicio;
 	private Date dataTermino;
 	private List<Contratacao> listaContratacao;
-	
+		
 	public Projeto(String nome, Date dataInicio, Date dataTermino) {
 		this.nome = nome;
 		this.dataInicio = dataInicio;
@@ -61,8 +61,6 @@ public class Projeto {
 				&& Objects.equals(listaContratacao, other.listaContratacao) && Objects.equals(nome, other.nome);
 	}
 	
-	
-
 
 	@Override
 	public String toString() {
@@ -72,31 +70,35 @@ public class Projeto {
 	public boolean adicionarContratacao (Contratacao c) {
 		if (c != null && !listaContratacao.contains(c)) {
 			this.listaContratacao.add(c);
+			
 			return true;
 		}
 		return false;
 	}
 	
+
 	public boolean removeContratacao(Contratacao c) {
-		if (c != null || !listaContratacao.isEmpty() || listaContratacao.contains(c)) {
+		if (c != null && !listaContratacao.isEmpty() && listaContratacao.contains(c)) {
 			this.listaContratacao.remove(c);
 			return true;
 		}
 		return false;
 	}
 	
+
 	public void listarContratacao() {
-		if(this.listaContratacao.isEmpty()) {
-			System.out.println("O projeto " + this.nome + " não possui contratações!");
-		}
+
+		System.out.println("**Contratações**\n" + "Projeto: \n\t" + this.nome + "\nFuncionário(s): ");
+	    for (Contratacao c : listaContratacao) {
+	  
+	        if (c.getStatus() != Status.DEMITIDO) {
+	            System.out.println("\t" + c.getFuncionario().getNome() + " [Status: " + c.getStatus() + "]");
+	        } else {
+	        	removeContratacao(c);
+	        }
+	    }
+
+	    System.out.println();
 		
-		if (!this.listaContratacao.isEmpty()) {
-			System.out.println("**Contratações**\n" + "Projeto: \n\t" + this.nome +
-						"\nFuncionário(s): ");
-			for (Contratacao c : listaContratacao) {
-				System.out.println("\t" + c.getFuncionario().getNome() +
-						" [Status: " + c.getStatus() + "]");
-			}
-		}
 	}
 }

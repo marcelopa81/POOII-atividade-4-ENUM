@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Contratacao {
 	
@@ -12,10 +13,10 @@ public class Contratacao {
 	
 	public Contratacao(Projeto projeto, Funcionario funcionario, Cargo cargo, Date dataContratacao) {
 		this.dataContratacao = dataContratacao;
-		this.projeto = projeto;
 		this.funcionario = funcionario;
 		this.cargo = cargo;
-		this.status = status.PENDENTE;
+		this.status = Status.PENDENTE;
+		projeto.adicionarContratacao(this);
 	}
 
 	
@@ -68,18 +69,37 @@ public class Contratacao {
 	}
 
 	public void pendente() {
-		this.status = status.PENDENTE;
+		this.status = Status.PENDENTE;
 	}
 	
 	public void contratar() {
-		if (this.status == status.PENDENTE) {
-			this.status = status.CONTRATADO;
-		}
+		this.status = Status.CONTRATADO;
 	}
 	
 	public void demitir() {
-		if (this.status == status.CONTRATADO) {
-			this.status = status.DEMITIDO;
-		}
+		this.status = Status.DEMITIDO;
 	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cargo, dataContratacao, funcionario, projeto, status);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contratacao other = (Contratacao) obj;
+		return cargo == other.cargo && Objects.equals(dataContratacao, other.dataContratacao)
+				&& Objects.equals(funcionario, other.funcionario) && Objects.equals(projeto, other.projeto)
+				&& status == other.status;
+	}
+	
+	
 }
